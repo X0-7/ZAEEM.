@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAEEM WEB | بنبيعك شغل بشغلنا</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #FFD700;
+            --gold-deep: #B8860B;
+            --black: #030303;
+            --white: #FFFFFF;
+            --grey: #B0B0B0;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* خلفية شبكية متحركة */
+        .bg-mesh {
+            position: fixed;
+            z-index: -2;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                #030303;
+        }
+
+        .bg-grid {
+            position: fixed;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* النافبار */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(3, 3, 3, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .logo-text span { color: var(--gold); }
+
+        nav ul { display: flex; gap: 30px; list-style: none; }
+        nav ul li a { 
+            color: var(--grey); text-decoration: none; font-weight: 700; transition: 0.3s;
+        }
+        nav ul li a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
+
+        /* قسم الـ Hero (الوجه العملاق) */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px 50px;
+            position: relative;
+        }
+
+        /* أنيميشن ظهور العناصر */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1s ease forwards;
+        }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.5s; }
+        .delay-3 { animation-delay: 0.8s; }
+        .delay-4 { animation-delay: 1.1s; }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-wrapper {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .logo-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px; 
+            height: 350px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.4) 0%, transparent 70%);
+            filter: blur(40px);
+            animation: pulse-glow 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+        }
+
+        .hero-logo {
+            width: 220px; 
+            height: 220px;
+            border-radius: 50%;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+            transition: transform 0.5s ease;
+            object-fit: cover;
+            background-color: #000;
+        }
+        
+        .hero-logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 900px;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--grey);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        .btn-gold {
+            background: linear-gradient(45deg, var(--gold), var(--gold-deep));
+            color: var(--black);
+            padding: 18px 60px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* شعاع الضوء اللي بيمر على الزرار */
+        .btn-gold::before, .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+
+        /* قسم الخدمات */
+        .section { padding: 100px 5%; }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 60px;
+        }
+        .section-title span { color: var(--gold); }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            perspective: 1000px;
+        }
+
+        .service-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 35px;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .service-card:hover {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.05);
+            transform: translateY(-10px);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        /* أنيميشن الأيقونات الطايرة */
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* تخصيص سرعة كل أيقونة عشان متتتحركش كلها في نفس الوقت */
+        .service-card:nth-child(2) .card-icon { animation-delay: 0.2s; }
+        .service-card:nth-child(3) .card-icon { animation-delay: 0.4s; }
+        .service-card:nth-child(4) .card-icon { animation-delay: 0.6s; }
+        .service-card:nth-child(5) .card-icon { animation-delay: 0.8s; }
+        .service-card:nth-child(6) .card-icon { animation-delay: 1s; }
+        .service-card:nth-child(7) .card-icon { animation-delay: 1.2s; }
+        .service-card:nth-child(8) .card-icon { animation-delay: 1.4s; }
+        .service-card:nth-child(9) .card-icon { animation-delay: 1.6s; }
+
+        .service-card h3 { font-size: 1.3rem; margin-bottom: 10px; color: var(--white); }
+        .service-card p { color: var(--grey); font-size: 0.95rem; }
+
+        /* قسم التواصل */
+        .contact-section {
+            padding: 100px 5%;
+            text-align: center;
+            background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.05));
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+
+        .contact-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--card-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+
+        .contact-card:hover::before { transform: scaleX(1); }
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--card-color);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--card-color);
+            transition: 0.4s;
+            animation: pulseIcon 2s infinite;
+        }
+
+        @keyframes pulseIcon {
+            0% { box-shadow: 0 0 0 0 var(--card-color); }
+            70% { box-shadow: 0 0 0 15px transparent; }
+            100% { box-shadow: 0 0 0 0 transparent; }
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.1) rotate(10deg);
+            background: var(--card-color);
+            color: #fff;
+        }
+
+        .contact-card h4 { font-size: 1.4rem; margin-bottom: 10px; }
+        .contact-card p { color: var(--grey); font-size: 1.1rem; }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* أنيميشن الـ Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero-logo { width: 160px; height: 160px; }
+            .logo-glow { width: 200px; height: 200px; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-mesh"></div>
+    <div class="bg-grid"></div>
+
+    <!-- النافبار -->
+    <header>
+        <div class="logo-text">ZAEEM <span>WEB</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#services">خدماتنا</a></li>
+                <li><a href="#contact">تواصل معنا</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- الوجه العملاق (Hero) -->
+    <section id="home" class="hero">
+        <div class="logo-wrapper fade-in-up delay-1">
+            <div class="logo-glow"></div>
+            <img src="1.png" alt="ZAEEM WEB Logo" class="hero-logo">
+        </div>
+        <h1 class="fade-in-up delay-2">مش بنبيعك كلام.. <br> <span>بنبيعك شغل بشغلنا</span></h1>
+        <p class="fade-in-up delay-3">
+            الموقع اللي إنت بتصفحه دلوقتي هو أحدث تقنية وأقوى تصميم إحنا بنستخدمه لشركتنا.
+            في ZAEEM WEB إحنا بنعترف إن المنتج اللي مجربناش على نفسنا مينفعش نبيه ليك. جاهز تخلي شغلك يتكلم عن نفسه بنفس القوة؟
+        </p>
+        <a href="#contact" class="btn-gold fade-in-up delay-4">ابدأ مشروعك دلوقتي</a>
+    </section>
+
+    <!-- الخدمات -->
+    <section id="services" class="section">
+        <h2 class="section-title reveal">خدماتنا اللي <span>بتصنع الفارق</span></h2>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="card-icon">🏢</div>
+                <h3>مواقع شركات احترافية</h3>
+                <p>واجهتك الرقمية اللي بتعكس قوة شركتك وتكسب ثقة عميلك من أول نظرة.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-icon">🚀</div>
+                <h3>صفحات هبوط (Landing Pages)</h3>
+                <p>صفحات بيعية هدفها الأول والأخير تحول الزائر لمشتري فوراً.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-icon">🛍️</div>
+                <h3>متاجر إلكترونية</h3>
+                <p>متاجر متكاملة أو بسيطة مرتبطة بالواتساب لتسهيل عمليات البيع.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-icon">📅</div>
+                <h3>صفحات حجز المواعيد</h3>
+                <p>أنظمة ذكية تنظم وقتك وتتيح لعملائك حجز جلساتهم بسهولة تامة.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-icon">📱</div>
+                <h3>Bio Link</h3>
+                <p>صفحات روابط أنيقة تختصر وجودك الرقمي في مكان واحد مريح.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-icon">🎨</div>
+                <h3>Portfolio</h3>
+                <p>صفحات احترافية لعرض أعمالك بطريقة تسلط الضوء على خبراتك.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-icon">🧠</div>
+                <h3>أدوات ذكية وحلول مخصصة</h3>
+                <p>عندك فكرة تقنية محدش نفذها؟ إحنا بنبرمجها ليك على مقاس.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-icon">🧩</div>
+                <h3>Coming Soon</h3>
+                <p>صفحات تمهيدية لجمع بيانات العملاء المحتملين قبل إطلاق منتجك.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="card-icon">🎁</div>
+                <h3>صفحات العروض والخصومات</h3>
+                <p>تصاميم مخصصة لإطلاق الخصومات لزيادة المبيعات الفورية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التواصل -->
+    <section id="contact" class="contact-section reveal">
+        <h2 class="section-title">جاهز تبدأ رحلتك للقمة؟ <br> <span>كلمنا دلوقتي</span></h2>
+        <p style="color: var(--grey); font-size: 1.2rem;">وفرنا لك أسرع طرق التواصل لبدء مشروعك بدون تعقيد</p>
+        
+        <div class="contact-cards">
+            <a href="https://wa.me/20106672268" target="_blank" class="contact-card" style="--card-color: #25D366;">
+                <div class="contact-icon">📱</div>
+                <h4>واتساب ومكالمات</h4>
+                <p>0106672268</p>
+            </a>
+            
+            <a href="https://www.facebook.com/ZAEEM.WEB?locale=ar_AR" target="_blank" class="contact-card" style="--card-color: #1877F2;">
+                <div class="contact-icon">🌐</div>
+                <h4>صفحة فيسبوك</h4>
+                <p>ZAEEM WEB</p>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 ZAEEM WEB | صُنع بشغف، ويُبيع بثقة.
+    </footer>
+
+    <script>
+        // 1. أنيميشن الـ Scroll Reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        reveals.forEach(reveal => {
+            observer.observe(reveal);
+        });
+
+        // 2. تأثير 3D للكروت عند حركة الماوس
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                let x = e.pageX - card.offsetLeft;
+                let y = e.pageY - card.offsetTop;
+                
+                let centerX = card.offsetWidth / 2;
+                let centerY = card.offsetHeight / 2;
+                let rotateX = (y - centerY) / 15;
+                let rotateY = (centerX - x) / 15;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+    </script>
+
+</body>
+</html>
